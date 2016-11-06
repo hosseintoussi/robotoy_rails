@@ -1,4 +1,4 @@
-App.robotoy = App.cable.subscriptions.create "RobotoyChannel",
+App.robotoy = App.cable.subscriptions.create {channel: "RobotoyChannel", id: Math.floor(1000 + Math.random() * 9000) },
   connected: ->
     # Called when the subscription is ready for use on the server
 
