@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on 'keypress', '#input_command', (event) ->
+  if event.keyCode is 13 # return = send
+    App.robotoy.play event.target.value
+    event.target.value = ''
+    event.preventDefault()
