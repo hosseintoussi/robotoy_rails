@@ -9,6 +9,23 @@ class RobotoyChannel < ApplicationCable::Channel
   end
 
   def play(data)
-    ActionCable.server.broadcast 'robotoy_channel', data['command']
+    return if data['command'].blank?
+    begin
+      @game ||= Robotoy::Game.new
+      set_params(data['command'])
+      @game.perform(@method, @args)
+      result = @game.perform(:report, [:string])
+    rescue => e
+      result = e.message
+    end
+    ActionCable.server.broadcast 'robotoy_channel', result
+  end
+
+  private
+
+  def set_params(command)
+    splitted = command.split(/\s+/)
+    @method = splitted[0].strip
+    @args = splitted[1] ? splitted[1].split(',').map(&:strip) : []
   end
 end
