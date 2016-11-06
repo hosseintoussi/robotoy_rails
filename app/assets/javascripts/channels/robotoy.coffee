@@ -6,7 +6,6 @@ App.robotoy = App.cable.subscriptions.create "RobotoyChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    console.log('test')
     $('#results').append "<p>#{data}</p>"
 
   play: (command)->
