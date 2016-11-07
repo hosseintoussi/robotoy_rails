@@ -6,7 +6,7 @@ App.robotoy = App.cable.subscriptions.create {channel: "RobotoyChannel", id: Mat
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    $('#results').append "<p>#{data}</p>"
+    $('#results').append "<p>>>> #{data}</p>"
 
   play: (command)->
     @perform 'play', command: command
